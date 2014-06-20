@@ -1,0 +1,96 @@
+Program
+	Type id DeclList
+DeclList
+	VarDecl2 Program 
+	( ParamDeclList ) Block FunDeclList2
+VarDeclList
+    VarDecl VarDeclList
+    epsilon
+VarDecl
+    Type id VarDecl2
+VarDecl2
+    ;
+    [ num ] ;
+FunDeclList
+    FunDecl FunDeclList2
+FunDeclList2
+    FunDeclList
+    epsilon
+FunDecl
+    Type id ( ParamDeclList ) Block
+ParamDeclList
+    ParamDeclListTail
+    epsilon
+ParamDeclListTail
+    ParamDecl ParamDeclListTail2
+ParamDeclListTail2
+    , ParamDeclListTail
+    epsilon
+ParamDecl
+    Type id ParamDecl2
+ParamDecl2
+    [ ]
+    epsilon
+Block
+    { VarDeclList StmtList }
+Type
+    int
+    char
+StmtList
+    Stmt StmtList2
+StmtList2
+    StmtList
+    epsilon
+Stmt
+    ;
+    Expr ;
+    return Expr ;
+    break ;
+    if ( Expr ) Stmt else Stmt
+    while ( Expr ) Stmt
+    Block
+Expr
+    num Expr2
+    ( Expr ) Expr2
+    UnaryOp Expr4
+    id Id
+Id
+    = Expr4
+    [ Expr ] Expr3
+    ( ExprList ) Expr2
+    Expr2
+Expr2
+    BinOp Expr4
+    epsilon
+Expr4
+    num Expr2
+    ( Expr ) Expr2
+    UnaryOp Expr4
+    id Id
+Expr3
+    = Expr4
+    Expr2
+ExprList
+    ExprListTail
+    epsilon
+ExprListTail
+    Expr ExprListTail2
+ExprListTail2
+    , ExprListTail
+    epsilon
+UnaryOp
+    -
+    !
+BinOp
+    +
+    -
+    *
+    /
+    ==
+    !=
+    <
+    <=
+    >
+    >=
+    &&
+    ||
